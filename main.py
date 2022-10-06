@@ -31,6 +31,17 @@ conv_handler = ConversationHandler(
 
             menu.input_surname:[MessageHandler(Filters.text, CRUD.surname)],
             menu.input_name:[MessageHandler(Filters.text, CRUD.name)],
+            menu.input_phone:[MessageHandler(Filters.text, CRUD.phone)],
+            menu.input_description:[MessageHandler(Filters.text, CRUD.description)],
+            menu.search:[MessageHandler(Filters.text, CRUD.search_ph)],
+            menu.answer_in_search:[MessageHandler(Filters.regex('^(Изменить критерии поиска|Выйти в основное меню|'
+                                                               'Выйти из программы)'), menu.answer_searchq)],
+            menu.choose_contact:[MessageHandler(Filters.regex('^(Выбрать контакт|'
+                                                               'Выйти в основное меню)'), menu.answer_choose_contact)],
+            menu.input_num_contact:[MessageHandler(Filters.text, CRUD.num_contact)],
+
+
+
             #
             # bt.want_play:[MessageHandler(Filters.regex('^(Бот|Человек)$'), bt.choose_mod)],
             # bt.choose_num_can:[MessageHandler(Filters.text, bt.check_num_can)],
