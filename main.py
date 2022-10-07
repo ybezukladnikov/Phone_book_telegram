@@ -1,7 +1,5 @@
 import logging
 import CRUD
-# import module_candies as bt
-# import rational as rt
 import menu
 from telegram import Update, Bot, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, ConversationHandler
@@ -45,30 +43,6 @@ conv_handler = ConversationHandler(
             menu.input_name_ch:[MessageHandler(Filters.text, CRUD.choose_change_name_contact)],
             menu.input_description_ch:[MessageHandler(Filters.text, CRUD.choose_change_description_contact)],
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            #
-            # bt.want_play:[MessageHandler(Filters.regex('^(Бот|Человек)$'), bt.choose_mod)],
-            # bt.choose_num_can:[MessageHandler(Filters.text, bt.check_num_can)],
-            # bt.choose_max_num:[MessageHandler(Filters.text, bt.check_max_can)],
-            # bt.start_play:[MessageHandler(Filters.text, bt.main_func)],
-            # bt.create_name:[MessageHandler(Filters.text, bt.check_name)],
-            # bt.step_first_pl:[MessageHandler(Filters.text, bt.main_step_first)],
-            # bt.step_second_pl:[MessageHandler(Filters.text, bt.main_step_second)],
-            #
-            #
             menu.exit_play: [MessageHandler(Filters.text, cancel)]
         },
 

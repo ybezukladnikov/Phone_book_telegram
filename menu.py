@@ -1,7 +1,6 @@
 from telegram import Update, Bot, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, ConversationHandler, CallbackContext
 import logger
-from math import gcd
 import CRUD
 import export_import as ei
 

@@ -1,7 +1,5 @@
 import json
-import logging
-# import module_candies as bt
-# import rational as rt
+import logger
 import menu
 from telegram import Update, Bot, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, ConversationHandler
@@ -87,6 +85,7 @@ def read_and_wr_ch(text,arg):
 
 
 def show_all_contact(update, _):
+    logger.my_log(update, _, 'Показал все контакты')
     phone_dir = read_and_write(dict_ph, 'r')
     if len(phone_dir)==0:
         update.message.reply_text('У вас пока нет контактов. ')
@@ -103,6 +102,7 @@ def show_all_contact(update, _):
     return menu.start(update, _)
 
 def search_ph(update, _):
+    logger.my_log(update, _, 'Поиск контактов')
     phone_dir = read_and_write(dict_ph, 'r')
     global search_res
     if not (update.message.text).isnumeric():
@@ -166,6 +166,7 @@ def num_contact(update, _):
 def delet_contact(update, _):
     global num_con
     global search_res
+    logger.my_log(update, _, f'Удалил контакт {search_res[num_con - 1]}')
     phone_dir = read_and_write(dict_ph, 'r')
     phone_dir.remove(search_res[num_con-1])
     search_res = []
