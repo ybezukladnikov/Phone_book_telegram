@@ -7,9 +7,10 @@ import export_import as ei
 
 
 first_question, input_num_contact, exit_play, choose_contact, answer_in_search,search,\
-    input_description, input_phone, input_name, input_surname = range(10)
-temp_list = []
-list_name = []
+    input_description, input_phone, input_name, input_surname, action_contact, \
+question_change_con, input_surname_ch, input_name_ch, input_tel_ch, input_description_ch = range(16)
+
+
 
 def start(update, _):
     logger.my_log(update, _, 'Зашел в программу')
@@ -64,7 +65,7 @@ def answer_fq(update, _):
         logger.my_log(update, CallbackContext, 'Найти контакт.')
         update.message.reply_text(
             f'{update.effective_user.first_name}\n'
-            'Начните вводить либо фамилию либо телефон.\n'
+            'Начните вводить фамилию, имя или телефон.\n'
         , reply_markup=ReplyKeyboardRemove()
         )
         return search
@@ -108,8 +109,9 @@ def answer_searchq(update, _):
         return search
 
 def answer_choose_contact(update, _):
-    print(update.message.text)
+
     if update.message.text == 'Выйти в основное меню':
+        CRUD.search_res = []
         logger.my_log(update, CallbackContext, 'Не захотел ничего делать.')
         update.message.reply_text(
             'Переводим в основное меню',
@@ -124,6 +126,59 @@ def answer_choose_contact(update, _):
         )
         return input_num_contact
 
+def choose_action_contact(update, _):
+    if update.message.text == 'Выйти в основное меню':
+        CRUD.search_res = []
+        logger.my_log(update, CallbackContext, 'Не захотел ничего делать.')
+        update.message.reply_text(
+            'Переводим в основное меню',
+            reply_markup=ReplyKeyboardRemove(),
+        )
+        return start(update, _)
+
+    if update.message.text == 'Удалить':
+        CRUD.delet_contact(update, _)
+        update.message.reply_text('Контакт успешно удален. Переводим вас в основное меню.')
+        return start(update, _)
+
+    if update.message.text == 'Изменить':
+        reply_keyboard = [['Фамилию'], ['Имя'], ['Телефон'], ['Описание']]
+        markup_key = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
+        update.message.reply_text(
+            f'{update.effective_user.first_name}!\n'
+            'Что будете менять?'
+            ,
+            reply_markup=markup_key)
+        return question_change_con
+
+def choose_what_change_contact(update, _):
+    if update.message.text == 'Фамилию':
+        update.message.reply_text(
+            'Введите новую фамаилию',
+            reply_markup=ReplyKeyboardRemove(),
+        )
+        return input_surname_ch
+
+    if update.message.text == 'Имя':
+        update.message.reply_text(
+            'Введите новое имя',
+            reply_markup=ReplyKeyboardRemove(),
+        )
+        return input_name_ch
+
+    if update.message.text == 'Телефон':
+        update.message.reply_text(
+            'Введите новое новый телефон',
+            reply_markup=ReplyKeyboardRemove(),
+        )
+        return input_tel_ch
+
+    if update.message.text == 'Описание':
+        update.message.reply_text(
+            'Введите новое описание к контакту',
+            reply_markup=ReplyKeyboardRemove(),
+        )
+        return input_description_ch
 
 
 
@@ -135,16 +190,9 @@ def answer_choose_contact(update, _):
 
 
 
-    # elif update.message.text == 'Играть':
-    #     logger.my_log(update, CallbackContext, 'Захотел поиграть.')
-    #     reply_keyboard = [['Бот', 'Человек']]
-    #     # Создаем простую клавиатуру для ответа
-    #     markup_key = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
-    #
-    #
-    #     update.message.reply_text(
-    #         f'{update.effective_user.first_name}\n'
-    #         'Выбери с кем ты будешь играть! '
-    #         ,
-    #         reply_markup=markup_key,)
-    #     return want_play
+
+
+
+
+
+

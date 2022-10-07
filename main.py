@@ -39,6 +39,23 @@ conv_handler = ConversationHandler(
             menu.choose_contact:[MessageHandler(Filters.regex('^(Выбрать контакт|'
                                                                'Выйти в основное меню)'), menu.answer_choose_contact)],
             menu.input_num_contact:[MessageHandler(Filters.text, CRUD.num_contact)],
+            menu.action_contact:[MessageHandler(Filters.regex('^(Удалить|Изменить|Выйти в основное меню)'), menu.choose_action_contact)],
+            menu.question_change_con:[MessageHandler(Filters.regex('^(Фамилию|Имя|Телефон|Описание)'), menu.choose_what_change_contact)],
+            menu.input_surname_ch:[MessageHandler(Filters.text, CRUD.choose_change_surname_contact)],
+            menu.input_name_ch:[MessageHandler(Filters.text, CRUD.choose_change_name_contact)],
+            menu.input_description_ch:[MessageHandler(Filters.text, CRUD.choose_change_description_contact)],
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
